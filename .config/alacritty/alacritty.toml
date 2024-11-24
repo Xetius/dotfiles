@@ -9,6 +9,12 @@ TERM = "xterm-256color"
 decorations = "Buttonless"
 dynamic_padding = false
 opacity = 0.9
+blur = true
+
+padding.x = 10
+padding.y = 10
+
+option_as_alt = "Both"
 
 [font]
 size = 16.0
@@ -34,3 +40,10 @@ history = 100000
 
 [selection]
 save_to_clipboard = true
+
+[keyboard]
+bindings = [
+  { key = "F1", mods = "None", chars = "\u0001" },
+  { key = "Q", mods = "Command", action = "None" },
+  { key = "W", mods = "Command", action = "None" },
+]
