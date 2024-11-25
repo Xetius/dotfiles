@@ -1,0 +1,13 @@
+alias ls='eza --color=auto --icons'
+alias ll='ls -la --git --git-repos'
+alias llt='ll -T'
+alias lld='ll -D'
+alias vim='nvim'
+alias gst='git status'
+alias gpr='git pull -r'
+alias k='kubectl'
+alias z='zoxide'
+alias vc='vim ~/.zshrc'
+alias sa='source ~/.zshrc'
+alias stowd='pushd ~/dotfiles && stow . && popd'
+
