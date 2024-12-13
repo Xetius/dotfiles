@@ -1,12 +1,26 @@
+# ls
 alias ls='eza --color=auto --icons'
 alias ll='ls -la --git --git-repos'
 alias llt='ll -T'
 alias lld='ll -D'
+
+# vim
 alias vim='nvim'
+
+# git
 alias gst='git status'
 alias gpr='git pull -r'
+
+# kubectl
 alias k='kubectl'
+
+# microk8s
+alias mk='microk8s'
+
+# zoxide
 alias z='zoxide'
+
+# miscellaneous
 alias vc='vim ~/.zshrc'
 alias sa='source ~/.zshrc'
 alias stowd='pushd ~/dotfiles && stow . && popd'
