@@ -41,7 +41,6 @@ save_to_clipboard = true
 
 [keyboard]
 bindings = [
-  { key = "F1", mods = "None", chars = "\u0001" },
   { key = "3", mods = "Alt", chars = "#" },
   { key = "Q", mods = "Command", action = "None" },
   { key = "W", mods = "Command", action = "None" },

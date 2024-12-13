@@ -26,9 +26,6 @@ alias mkvs='microk8s version'
 alias mkcl='microk8s config'
 alias mkk='microk8s kubectl'
 
-# zoxide
-alias z='zoxide'
-
 # miscellaneous
 alias vc='vim ~/.zshrc'
 alias sa='source ~/.zshrc'
