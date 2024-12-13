@@ -16,6 +16,15 @@ alias k='kubectl'
 
 # microk8s
 alias mk='microk8s'
+alias mke='microk8s enable'
+alias mkd='microk8s disable'
+alias mkst='microk8s status'
+alias mkup='microk8s start'
+alias mkdn='microk8s stop'
+alias mkrs='microk8s reset'
+alias mkvs='microk8s version'
+alias mkcl='microk8s config'
+alias mkk='microk8s kubectl'
 
 # zoxide
 alias z='zoxide'
