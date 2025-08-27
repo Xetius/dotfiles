@@ -31,3 +31,6 @@ alias vc='vim ~/.zshrc'
 alias sa='source ~/.zshrc'
 alias stowd='pushd ~/dotfiles && stow . && popd'
 
+# python
+alias python='python3'
+alias pip='pip3'
