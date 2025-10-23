@@ -32,5 +32,5 @@ alias sa='source ~/.zshrc'
 alias stowd='pushd ~/dotfiles && stow . && popd'
 
 # python
-alias python='python3'
-alias pip='pip3'
+alias python='/opt/homebrew/bin/python3'
+alias pip='/opt/homebrew/bin/pip3'

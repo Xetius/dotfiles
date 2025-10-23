@@ -29,6 +29,7 @@ require('lazy').setup {
   require 'plugins.indent-blankline',
   require 'plugins.misc',
   require 'plugins.comment',
+  require 'plugins.claude',
 }
 
 vim.api.nvim_create_autocmd('TextYankPost', {
