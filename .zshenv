@@ -9,4 +9,5 @@ export VISUAL="nvim"
 export HISTFILE="$HOME/.zhistory"
 export HISTSIZE=100000
 export SAVEHIST=100000
-source "/Users/chris/.rover/env"
+
+export NODE_TLS_REJECT_UNAUTHORIZED=0

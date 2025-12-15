@@ -41,4 +41,6 @@ eval "$(zoxide init zsh)"
 eval "$(thefuck --alias)"
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/simple.omp.yaml)"
 
-export PATH=$(brew --prefix)/bin:$PATH
+
+export PATH=$HOME/.local/bin:$(brew --prefix)/bin:$PATH
+
