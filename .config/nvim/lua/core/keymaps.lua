@@ -83,5 +83,3 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Insert Date and Time with F5
 vim.keymap.set('n', '<F5>', '"=strftime("%c")<CR>P', opts)
 vim.keymap.set('i', '<F5>', '<C-R>=strftime("%c")<CR>', opts)
-
--- Gitsigns configuration

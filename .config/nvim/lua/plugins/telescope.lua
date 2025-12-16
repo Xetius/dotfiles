@@ -110,5 +110,14 @@ return {
         prompt_title = 'Live Grep in Open Files',
       }
     end, { desc = '[S]earch [/] in Open Files' })
+
+    -- Git worktree keybindings
+    vim.keymap.set('n', '<leader>gw', function()
+      require('telescope').extensions.git_worktree.git_worktrees()
+    end, { desc = '[G]it [W]orktrees' })
+
+    vim.keymap.set('n', '<leader>gn', function()
+      require('telescope').extensions.git_worktree.create_git_worktree()
+    end, { desc = '[G]it [N]ew worktree' })
   end,
 }

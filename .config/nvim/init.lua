@@ -19,24 +19,26 @@ require('lazy').setup {
   require 'plugins.colorscheme',
   require 'plugins.bufferline',
   require 'plugins.lualine',
+  require 'plugins.gitsigns',
+  require 'plugins.lazygit',
   require 'plugins.treesitter',
   require 'plugins.telescope',
   require 'plugins.lsp',
   require 'plugins.autocomplete',
   require 'plugins.none-ls',
-  require 'plugins.gitsigns',
   require 'plugins.alpha',
   require 'plugins.indent-blankline',
   require 'plugins.misc',
   require 'plugins.comment',
   require 'plugins.claude',
+  { 'nvim-mini/mini.nvim', version = false },
 }
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
-    vim.highlight.on_yank()
+    vim.hl.on_yank()
   end,
 })
 
