@@ -47,10 +47,10 @@ vim.keymap.set('n', '<leader>se', '<C-w>=', opts) -- make split windows equal wi
 vim.keymap.set('n', '<leader>xs', ':close<CR>', opts) -- close current split window
 
 -- Navigate between splits
-vim.keymap.set('n', '<C-k>', ':wincmd k<CR>', opts)
-vim.keymap.set('n', '<C-j>', ':wincmd j<CR>', opts)
-vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', opts)
-vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', opts)
+vim.keymap.set('n', '<C-k>', '<cmd> TmuxNavigateLeft<cr>', opts)
+vim.keymap.set('n', '<C-j>', '<cmd> TmuxNavigateDown<cr>', opts)
+vim.keymap.set('n', '<C-h>', '<cmd> TmuxNavigateUp<cr>', opts)
+vim.keymap.set('n', '<C-l>', '<cmd> TmuxNavigateRight<cr>', opts)
 
 -- Tabs
 vim.keymap.set('n', '<leader>to', ':tabnew<CR>', opts) -- open new tab
@@ -81,5 +81,10 @@ vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Insert Date and Time with F5
-vim.keymap.set('n', '<F5>', '"=strftime("%c")<CR>P', opts)
-vim.keymap.set('i', '<F5>', '<C-R>=strftime("%c")<CR>', opts)
+vim.keymap.set('n', '<F5>', '"=strftime("%a %d %b %Y")<CR>P', opts)
+vim.keymap.set('i', '<F5>', '<C-R>=strftime("%a %d %b %Y")<CR>', opts)
+
+vim.keymap.set('n', '<leader>tw', '<cmd>Twilight<cr>', opts)
+
+-- Markdown Preview
+vim.keymap.set('n', '<leader>mp', '<cmd>MarkdownPreviewToggle<cr>', opts)

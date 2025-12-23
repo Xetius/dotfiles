@@ -3,6 +3,7 @@ return {
   {
     -- Tmux & split window navigation
     'christoomey/vim-tmux-navigator',
+    lazy = false,
   },
   {
     -- Detect tabstop and shiftwidth automatically
@@ -47,7 +48,22 @@ return {
     dependencies = { 'nvim-telescope/telescope.nvim' },
     config = function()
       require('git-worktree').setup()
-      require('telescope').load_extension('git_worktree')
+      require('telescope').load_extension 'git_worktree'
     end,
+  },
+  {
+    'folke/twilight.nvim',
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+  },
+  {
+    -- Markdown preview in browser
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    ft = { 'markdown' },
+    build = 'cd app && npm install',
   },
 }
