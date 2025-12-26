@@ -31,7 +31,7 @@ require('lazy').setup {
   require 'plugins.misc',
   require 'plugins.comment',
   require 'plugins.claude',
-  { 'nvim-mini/mini.nvim', version = false },
+  require 'plugins.mini',
 }
 
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -49,4 +49,4 @@ vim.api.nvim_create_autocmd('TermOpen', {
     vim.opt.relativenumber = false
   end,
 })
--- vim: ts=2 sts=2 sw=2 et
+-- vim: ts=6 sts=2 sw=2 et
