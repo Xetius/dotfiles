@@ -1,4 +1,6 @@
+theme = Gruvbox Dark
 font-family = "JetBrainsMono Nerd Font Mono"
 font-feature = -calt
 grapheme-width-method = unicode
 keybind = shift+enter=text:\x1b\r
+background-opacity = 0.8
