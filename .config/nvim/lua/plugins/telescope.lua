@@ -1,123 +1,168 @@
-return {
-  'nvim-telescope/telescope.nvim',
-  event = 'VimEnter',
-  -- branch = '0.1.x',
-  branch = 'master',
-  dependencies = {
-    'nvim-lua/plenary.nvim',
-    { -- If encountering errors, see telescope-fzf-native README for installation instructions
-      'nvim-telescope/telescope-fzf-native.nvim',
+local setup = function()
+  local telescope = require("telescope")
+  local actions = require("telescope.actions")
+  local builtin = require("telescope.builtin")
 
-      -- `build` is used to run some command when the plugin is installed/updated.
-      -- This is only run then, not every time Neovim starts up.
-      build = 'make',
+  local get_total_buffers = function()
+    local bufnrs = {}
+    local i = 1
+    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+      if vim.fn.buflisted(bufnr) == 1 then
+        bufnrs[i] = bufnr
+        i = i + 1
+      end
+    end
+    return #bufnrs
+  end
 
-      -- `cond` is a condition used to determine whether this plugin should be
-      -- installed and loaded.
-      cond = function()
-        return vim.fn.executable 'make' == 1
-      end,
-    },
-    { 'nvim-telescope/telescope-ui-select.nvim' },
+  local in_git_repo = function()
+    vim.fn.system("git rev-parse --is-inside-work-tree")
+    if vim.v.shell_error == 0 then
+      return true
+    else
+      return false
+    end
+  end
 
-    -- Useful for getting pretty icons, but requires a Nerd Font.
-    { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
-  },
-  config = function()
-    -- Telescope is a fuzzy finder that comes with a lot of different things that
-    -- it can fuzzy find! It's more than just a "file finder", it can search
-    -- many different aspects of Neovim, your workspace, LSP, and more!
-    --
-    -- The easiest way to use Telescope, is to start by doing something like:
-    --  :Telescope help_tags
-    --
-    -- After running this command, a window will open up and you're able to
-    -- type in the prompt window. You'll see a list of `help_tags` options and
-    -- a corresponding preview of the help.
-    --
-    -- Two important keymaps to use while in Telescope are:
-    --  - Insert mode: <c-/>
-    --  - Normal mode: ?
-    --
-    -- This opens a window that shows you all of the keymaps for the current
-    -- Telescope picker. This is really useful to discover what Telescope can
-    -- do as well as how to actually do it!
+  local default_picker = function()
+    local picker = builtin.oldfiles
+    if get_total_buffers() > 1 then
+      picker = builtin.buffers
+    elseif in_git_repo() then
+      picker = builtin.git_files
+    end
+    return picker()
+  end
 
-    -- [[ Configure Telescope ]]
-    -- See `:help telescope` and `:help telescope.setup()`
-    require('telescope').setup {
-      -- You can put your default mappings / updates / etc. in here
-      --  All the info you're looking for is in `:help telescope.setup()`
-      defaults = {
-        mappings = {
-          i = {
-            ['<C-k>'] = require('telescope.actions').move_selection_previous, -- move to prev result
-            ['<C-j>'] = require('telescope.actions').move_selection_next, -- move to next result
-            ['<C-l>'] = require('telescope.actions').select_default, -- open file
-          },
-        },
-      },
-      pickers = {
-        find_files = {
-          file_ignore_patterns = { 'node_modules', '%.git', '%.venv' },
-          hidden = true,
-        },
-        live_grep = {
-          file_ignore_patterns = { 'node_modules', '%.git', '%.venv' },
-          additional_args = function(_)
-            return { '--hidden' }
-          end,
-        },
-      },
-      extensions = {
-        ['ui-select'] = {
-          require('telescope.themes').get_dropdown(),
-        },
-      },
+  local picker_map = {
+    ["Buffers"] = builtin.buffers,
+    ["Git Files"] = builtin.git_files,
+    ["Oldfiles"] = builtin.oldfiles,
+    ["Find Files"] = builtin.find_files,
+    ["Telescope Builtin"] = builtin.builtin,
+  }
+
+  local get_pickers_to_cycle = function()
+    local ordered_pickers = {
+      "Buffers",
+      "Git Files",
+      "Oldfiles",
+      "Find Files",
+      "Telescope Builtin",
     }
+    local pickers_to_cycle = {}
+    local i = 1
+    for _, title in ipairs(ordered_pickers) do
+      if title == "Buffers" and get_total_buffers() < 2 then
+        goto continue
+      elseif title == "Git Files" and not in_git_repo() then
+        goto continue
+      end
+      pickers_to_cycle[i] = title
+      i = i + 1
+      ::continue::
+    end
+    return pickers_to_cycle
+  end
 
-    -- Enable Telescope extensions if they are installed
-    pcall(require('telescope').load_extension, 'fzf')
-    pcall(require('telescope').load_extension, 'ui-select')
+  local next_picker = function(prompt_bufnr)
+    local pickers_to_cycle = get_pickers_to_cycle()
+    local state = require("telescope.actions.state")
+    local current_picker = state.get_current_picker(prompt_bufnr)
 
-    -- See `:help telescope.builtin`
-    local builtin = require 'telescope.builtin'
-    vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-    vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-    vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-    vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-    vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-    vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-    vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-    vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+    local next_index = 1
+    for i, title in ipairs(pickers_to_cycle) do
+      if title == current_picker.prompt_title then
+        next_index = i + 1
+        if next_index > #pickers_to_cycle then
+          next_index = 1
+        end
+        break
+      end
+    end
+    local next_title = pickers_to_cycle[next_index]
+    local new_picker = picker_map[next_title]
+    return new_picker({ ["default_text"] = state.get_current_line() })
+  end
 
-    -- Slightly advanced example of overriding default behavior and theme
-    vim.keymap.set('n', '<leader>/', function()
-      -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-        winblend = 10,
-        previewer = false,
-      })
-    end, { desc = '[/] Fuzzily search in current buffer' })
+  local prev_picker = function(prompt_bufnr)
+    local pickers_to_cycle = get_pickers_to_cycle()
+    local state = require("telescope.actions.state")
+    local current_picker = state.get_current_picker(prompt_bufnr)
 
-    -- It's also possible to pass additional configuration options.
-    --  See `:help telescope.builtin.live_grep()` for information about particular keys
-    vim.keymap.set('n', '<leader>s/', function()
-      builtin.live_grep {
-        grep_open_files = true,
-        prompt_title = 'Live Grep in Open Files',
-      }
-    end, { desc = '[S]earch [/] in Open Files' })
+    local prev_index = 1
+    for i, title in ipairs(pickers_to_cycle) do
+      if title == current_picker.prompt_title then
+        prev_index = i - 1
+        if prev_index == 0 then
+          prev_index = #pickers_to_cycle
+        end
+        break
+      end
+    end
+    local prev_title = pickers_to_cycle[prev_index]
+    local new_picker = picker_map[prev_title]
+    return new_picker({ ["default_text"] = state.get_current_line() })
+  end
 
-    -- Git worktree keybindings
-    vim.keymap.set('n', '<leader>gw', function()
-      require('telescope').extensions.git_worktree.git_worktrees()
-    end, { desc = '[G]it [W]orktrees' })
+  telescope.setup({
+    defaults = {
+      color_devicons = false,
+      layout_config = {
+        width = 0.7,
+        horizontal = {
+          preview_width = 0.6,
+        },
+      },
+      mappings = {
+        i = {
+          ["<C-u>"] = false,
+          ["<C-d>"] = false,
+          ["<C-j>"] = actions.move_selection_next,
+          ["<C-k>"] = actions.move_selection_previous,
+          ["<C-f>"] = next_picker,
+          ["<C-b>"] = prev_picker,
+          ["<C-o>"] = actions.select_default,
+        },
+      },
+    },
+    pickers = {
+      buffers = {
+        ignore_current_buffer = true,
+        sort_lastused = true,
+      },
+    },
+  })
+  telescope.load_extension("fzf")
 
-    vim.keymap.set('n', '<leader>gn', function()
-      require('telescope').extensions.git_worktree.create_git_worktree()
-    end, { desc = '[G]it [N]ew worktree' })
-  end,
+  local nmap = function(key, action, desc)
+    vim.keymap.set("n", key, action, { desc = desc })
+  end
+
+  nmap("<leader><leader>", default_picker, "Telescope")
+  nmap("<leader>f", builtin.oldfiles, "[F]ind recently opened files")
+  nmap("<leader>sb", builtin.current_buffer_fuzzy_find, "[S]earch in current [B]uffer")
+  nmap("<leader>sf", builtin.find_files, "[S]earch [F]iles")
+  nmap("<leader>sh", builtin.help_tags, "[S]earch [H]elp")
+  nmap("<leader>sw", builtin.grep_string, "[S]earch current [W]ord")
+  nmap("<leader>sg", builtin.live_grep, "[S]earch by [G]rep")
+  nmap("<leader>sd", builtin.diagnostics, "[S]earch [D]iagnostics")
+  nmap("<leader>sr", builtin.command_history, "[S]earch command histo[R]y")
+end
+
+return {
+  {
+    "nvim-telescope/telescope.nvim",
+    version = "0.2.0",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = setup,
+  },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "make",
+    cond = function()
+      return vim.fn.executable("make") == 1
+    end,
+  },
 }
+
