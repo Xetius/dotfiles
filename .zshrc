@@ -23,8 +23,9 @@ setopt HIST_SAVE_NO_DUPS
 setopt HIST_VERIFY
 
 # ALIASES
-
 source $DOTFILES/zsh/aliases
+# Command Buffer Hotkeys
+source $DOTFILES/zsh/hotkeys
 
 bindkey -v
 export KEYTIMEOUT=1
@@ -34,8 +35,20 @@ if type brew &>/dev/null; then
 
   autoload -Uz compinit && compinit
   autoload -Uz bashcompinit && bashcompinit
-  autoload -Uz vcs_info
 fi
+
+# load version control info.  Used in eza command (ls replacement)
+autoload -Uz vcs_info
+
+# Open buffer line in editor
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
+
+bindkey ' ' magic-space
+
+# extended moves commands.
+autoload zmv
 
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
@@ -58,3 +71,5 @@ elif [ -x "/opt/homebrew/bin/aws_completer" ]; then
 fi
 
 export PATH=$HOME/.local/bin:$(brew --prefix)/bin:$PATH
+
+# ref: https://www.youtube.com/watch?v=3fVAtaGhUyU

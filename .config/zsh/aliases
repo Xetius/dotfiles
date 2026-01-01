@@ -42,3 +42,9 @@ alias start='export AWS_PROFILE=DevOpsAdmin && aws sso login --sso-session DevOp
 alias tfp='terraform plan -var-file="env_settings/dev.tfvars"'
 alias tfa='terraform apply -var-file="env_settings/dev.tfvars"'
 alias tfd='terraform destroy -var-file="env_settings/dev.tfvars"'
+
+# alias <cmd>='<statement>'
+# alias -s <ext>=<action> -- just type the file name and it executes action based on ext
+# alias -g <name>='<statement' -- inline alias extension. Use uppercase name
+
+
