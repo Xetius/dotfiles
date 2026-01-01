@@ -32,19 +32,28 @@ export KEYTIMEOUT=1
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
-  autoload -Uz compinit
-  compinit
+  autoload -Uz compinit && compinit
+  autoload -Uz bashcompinit && bashcompinit
 fi
 
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 eval "$(thefuck --alias)"
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/simple.omp.yaml)"
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/xetius.omp.json)"
 
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+
+source <(kubectl completion zsh)
+if command -v aws_completer >/dev/null 2>&1; then
+  complete -C aws_completer aws
+elif [ -x "/usr/local/bin/aws_completer" ]; then
+  complete -C "/usr/local/bin/aws_completer" aws
+elif [ -x "/opt/homebrew/bin/aws_completer" ]; then
+  complete -C "/opt/homebrew/bin/aws_completer" aws
+fi
 
 export PATH=$HOME/.local/bin:$(brew --prefix)/bin:$PATH
