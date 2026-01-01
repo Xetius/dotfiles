@@ -34,6 +34,7 @@ if type brew &>/dev/null; then
 
   autoload -Uz compinit && compinit
   autoload -Uz bashcompinit && bashcompinit
+  autoload -Uz vcs_info
 fi
 
 eval "$(fzf --zsh)"
