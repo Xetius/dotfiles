@@ -2,7 +2,7 @@ return {
 	{ "nvim-mini/mini.icons", version = false, opts = { silent = true } },
 	{ "nvim-mini/mini.basics", version = false, opts = { silent = true } },
 	{ "nvim-mini/mini.statusline", version = false, opts = { silent = true } },
-	{ "nvim-mini/mini.files", version = false, opts = { silent = true } },
+	-- { "nvim-mini/mini.files", version = false, opts = { silent = true } },
 	{ "nvim-mini/mini.ai", version = false, opts = { silent = true } },
 	{ "nvim-mini/mini.comment", version = false, opts = { silent = true } },
 	{ "nvim-mini/mini.pairs", version = false, opts = { silent = true } },
@@ -71,5 +71,5 @@ return {
 	{ "nvim-mini/mini.indentscope", version = false, opts = { silent = true } },
 	{ "nvim-mini/mini.notify", version = false, opts = { silent = true } },
 	{ "nvim-mini/mini.splitjoin", version = false, opts = { silent = true } },
-	{ "nvim-mini/mini.starter", version = false, opts = { silent = true } },
+	-- { "nvim-mini/mini.starter", version = false, opts = { silent = true } },
 }
