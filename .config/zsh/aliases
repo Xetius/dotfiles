@@ -13,7 +13,8 @@ alias gpr='git pull -r'
 
 # kubectl
 alias k='kubectl'
-
+alias -g JQ="| jaq -CRr '. as \$line | try (fromjson | [\"\u001b[33m\"+(.ts|fromdateiso8601|strftime(\"%Y-%m-%d %H:%M:%S\")), (if .level==\"info\" then \"\u001b[32m\"+.level elif .level==\"warn\" then \"\u001b[33m\"+.level elif .level==\"error\" then \"\u001b[31m\"+.level else \"\u001b[37m\"+.level end), \"\u001b[37m\"+.msg] | @tsv) catch \$line'"
+#
 # microk8s
 alias mk='microk8s'
 alias mke='microk8s enable'
@@ -38,13 +39,13 @@ alias stowd='pushd ~/dotfiles && stow . && popd'
 alias tma='tmux attach'
 
 
-alias start='export AWS_PROFILE=DevOpsAdmin && aws sso login --sso-session DevOpsAdmin'
+alias start='export KUBECONFIG=~/.kube/core-services-dev && export AWS_PROFILE=DevOpsAdmin && aws sso login --sso-session DevOpsAdmin'
 alias tfp='terraform plan -var-file="env_settings/dev.tfvars"'
 alias tfa='terraform apply -var-file="env_settings/dev.tfvars"'
 alias tfd='terraform destroy -var-file="env_settings/dev.tfvars"'
 
 # alias <cmd>='<statement>'
 # alias -s <ext>=<action> -- just type the file name and it executes action based on ext
-# alias -g <name>='<statement' -- inline alias extension. Use uppercase name
+# alias -g <name>='<statement>' -- inline alias extension. Use uppercase name
 
 

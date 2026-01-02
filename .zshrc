@@ -22,12 +22,13 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_VERIFY
 
+bindkey -v
+
 # ALIASES
 source $DOTFILES/zsh/aliases
 # Command Buffer Hotkeys
 source $DOTFILES/zsh/hotkeys
 
-bindkey -v
 export KEYTIMEOUT=1
 
 if type brew &>/dev/null; then

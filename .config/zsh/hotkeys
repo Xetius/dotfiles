@@ -1,2 +1,2 @@
 # Command Buffer Hotkeys
-bindkey -s '^Xgc' 'git commit -m ""\C-b'
+bindkey -s '^Xgc' 'git commit -m ""^[OD'
