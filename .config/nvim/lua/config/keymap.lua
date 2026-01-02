@@ -46,7 +46,7 @@ vim.keymap.set("n", "<leader>tw", "<cmd>Twilight<cr>", { desc = "Toggle Twilight
 
 vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Toggle Markdown Preview" })
 
-vim.keymap.set("n", "=", "<cmd>Oil --float<CR>", {desc="Open Parent Directory in Oil"})
-vim.keymap.set("n", "gl", function() vim.diagnostic.open_float() end,
-    {desc="Open Diagnostics in Float"}
-)
+vim.keymap.set("n", "<leader>e", "<cmd>Oil --float<CR>", { desc = "Open Parent Directory in Oil" })
+vim.keymap.set("n", "gl", function()
+	vim.diagnostic.open_float()
+end, { desc = "Open Diagnostics in Float" })

@@ -68,7 +68,7 @@ return {
 		end,
 	},
 	{ "nvim-mini/mini.animate", version = false, opts = { silent = true } },
-	{ "nvim-mini/mini.indentscope", version = false, opts = { silent = true } },
+	-- { "nvim-mini/mini.indentscope", version = false, opts = { silent = true } },
 	{ "nvim-mini/mini.notify", version = false, opts = { silent = true } },
 	{ "nvim-mini/mini.splitjoin", version = false, opts = { silent = true } },
 	-- { "nvim-mini/mini.starter", version = false, opts = { silent = true } },
