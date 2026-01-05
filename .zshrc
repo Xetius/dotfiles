@@ -73,4 +73,3 @@ fi
 
 export PATH=$HOME/.local/bin:$(brew --prefix)/bin:$PATH
 
-# ref: https://www.youtube.com/watch?v=3fVAtaGhUyU

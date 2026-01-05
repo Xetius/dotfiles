@@ -16,5 +16,8 @@ export NODE_TLS_REJECT_UNAUTHORIZED=0
 if [[ "$(hostname)" == "lontngm-047.local" ]]; then
     export AWS_PROFILE=DevOpsAdmin
     export KUBECONFIG=~/.kube/core-services-dev
+
+    test -f "${DOTFILES}/zsh/secrets" && source "$_"
 fi
+
 
