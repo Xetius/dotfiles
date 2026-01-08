@@ -71,5 +71,5 @@ elif [ -x "/opt/homebrew/bin/aws_completer" ]; then
   complete -C "/opt/homebrew/bin/aws_completer" aws
 fi
 
-export PATH=$HOME/.local/bin:$(brew --prefix)/bin:$PATH
+export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.local/bin:$(brew --prefix)/bin:$PATH
 

@@ -46,7 +46,8 @@
           "template": " ﴱ {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} ",
           "options": {
             "context_aliases": {
-              "arn:aws:eks:eu-west-1:679075971591:cluster/core-services-dev": "core-services-dev"
+              "arn:aws:eks:eu-west-1:679075971591:cluster/core-services-dev": "core-services-dev",
+              "arn:aws:eks:eu-west-1:679075971591:cluster/core-services-temp-chudson": "core-services-temp-chudson"
             },
             "cluster_aliases": {
               "kind-kind": "Kind"

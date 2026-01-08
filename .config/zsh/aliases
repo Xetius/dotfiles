@@ -39,7 +39,7 @@ alias stowd='pushd ~/dotfiles && stow . && popd'
 alias tma='tmux attach'
 
 
-alias start='export KUBECONFIG=~/.kube/core-services-dev && export AWS_PROFILE=DevOpsAdmin && aws sso login --sso-session DevOpsAdmin'
+# alias start='export KUBECONFIG=~/.kube/core-services-dev && export AWS_PROFILE=DevOpsAdmin && aws sso login --sso-session DevOpsAdmin'
 alias tfp='terraform plan -var-file="env_settings/dev.tfvars"'
 alias tfa='terraform apply -var-file="env_settings/dev.tfvars"'
 alias tfd='terraform destroy -var-file="env_settings/dev.tfvars"'
