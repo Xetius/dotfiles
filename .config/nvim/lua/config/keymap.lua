@@ -28,8 +28,6 @@ vim.keymap.set("n", "<A-k>", ":m .-2<cr>==", { desc = "Move line up" })
 vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("v", "<A-k>", ":m '>-2<cr>gv=gv", { desc = "Move selection up" })
 
-vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>", { desc = "Open MiniFiles browser" })
-
 vim.keymap.set("n", "<C-k>", "<cmd> TmuxNavigateLeft<cr>", { desc = "Move to left Pane" })
 vim.keymap.set("n", "<C-j>", "<cmd> TmuxNavigateDown<cr>", { desc = "Move to below Pane" })
 vim.keymap.set("n", "<C-h>", "<cmd> TmuxNavigateUp<cr>", { desc = "Move to above Pane" })

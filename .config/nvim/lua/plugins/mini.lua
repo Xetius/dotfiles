@@ -57,9 +57,9 @@ return {
 	-- 		})
 	-- 	end,
 	-- },
-	{ "nvim-mini/mini.diff", version = false, opts = { silent = true } },
+	-- { "nvim-mini/mini.diff", version = false, opts = { silent = true } },
 	{ "nvim-mini/mini.extra", version = false, opts = { silent = true } },
-	{ "nvim-mini/mini.pick", version = false, opts = { silent = true } },
+	-- { "nvim-mini/mini.pick", version = false, opts = { silent = true } },
 	{
 		"nvim-mini/mini-git",
 		version = false,
@@ -67,7 +67,7 @@ return {
 			require("mini.git").setup()
 		end,
 	},
-	{ "nvim-mini/mini.animate", version = false, opts = { silent = true } },
+	-- { "nvim-mini/mini.animate", version = false, opts = { silent = true } },
 	-- { "nvim-mini/mini.indentscope", version = false, opts = { silent = true } },
 	-- { "nvim-mini/mini.notify", version = false, opts = { silent = true } },
 	{ "nvim-mini/mini.splitjoin", version = false, opts = { silent = true } },
