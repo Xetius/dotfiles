@@ -45,6 +45,8 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "plugins/git",   from:oh-my-zsh
+zplug "jeffreytse/zsh-vi-mode"
+zplug "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/gruvbox", from:local, as:theme
 
 if type brew &>/dev/null; then
   autoload -Uz compinit && compinit

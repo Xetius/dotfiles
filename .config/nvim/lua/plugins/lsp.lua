@@ -1,29 +1,92 @@
-return {
-	"neovim/nvim-lspconfig",
-	dependencies = {
-		"mason-org/mason.nvim",
-		"mason-org/mason-lspconfig.nvim",
-		"saghen/blink.cmp",
-	},
+-- All things LSP and Autocomplete
+vim.pack.add({
+	{ src = "https://github.com/stevearc/conform.nvim" },
+	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/mason-org/mason.nvim" },
+	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+	{ src = "https://github.com/hrsh7th/cmp-nvim-lsp" },
+	{ src = "https://github.com/hrsh7th/cmp-buffer" },
+	{ src = "https://github.com/hrsh7th/cmp-path" },
+	{ src = "https://github.com/hrsh7th/cmp-cmdline" },
+	{ src = "https://github.com/hrsh7th/nvim-cmp" },
+	{ src = "https://github.com/L3MON4D3/cmp_luasnip" },
+})
 
-	config = function(_, opts)
-		require("mason").setup()
-		require("mason-lspconfig").setup({
-			ensure_installed = {
-				"lua_ls",
-				"terraformls",
-				"gh_actions_ls",
-				"bashls",
-				"dockerls",
-				"helm_ls",
-				"jsonls",
-				"lua_ls",
-				"marksman",
-				"sqlls",
-				"stylua",
-				"terraformls",
-				"yamlls",
-			},
-		})
-	end,
-}
+require("conform").setup({
+	formatters_by_ft = {},
+})
+local cmp = require("cmp")
+local cmp_lsp = require("cmp_nvim_lsp")
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+		end,
+	},
+	mapping = cmp.mapping.preset.insert({
+		["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+		["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+		["<C-y>"] = cmp.mapping.confirm({ select = true }),
+		["<C-Space>"] = cmp.mapping.complete(),
+	}),
+	sources = cmp.config.sources({
+		{ name = "copilot", group_index = 2 },
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" }, -- For luasnip users.
+	}, {
+		{ name = "buffer" },
+	}),
+})
+
+vim.diagnostic.config({
+	-- update_in_insert = true,
+	float = {
+		focusable = false,
+		style = "minimal",
+		border = "rounded",
+		source = "always",
+		header = "",
+		prefix = "",
+	},
+})
+
+local capabilities =
+	vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
+require("mason").setup()
+require("mason-lspconfig").setup({
+	ensure_installed = {
+		"lua_ls",
+		"rust_analyzer",
+		"gopls",
+		"yamlls",
+		"terraformls",
+		"bashls",
+	},
+	handlers = {
+		function(server_name)
+			require("lspconfig").setup({
+				capabilities = capabilities,
+			})
+		end,
+		["lua_ls"] = function()
+			local lspconfig = require("lspconfig")
+			lspconfig.lua_ls.setup({
+				capabilities = capabilities,
+				settings = {
+					Lua = {
+						format = {
+							enable = true,
+							-- Put format options here
+							-- NOTE: the value should be STRING!!
+							defaultConfig = {
+								indent_style = "space",
+								indent_size = "2",
+							},
+						},
+					},
+				},
+			})
+		end,
+	},
+})
