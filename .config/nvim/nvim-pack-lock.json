@@ -29,7 +29,7 @@
       "src": "https://github.com/L3MON4D3/cmp_luasnip"
     },
     "conform.nvim": {
-      "rev": "5ac2bb57a9096f00ca50e1a3c46020d5930319b8",
+      "rev": "c2526f1cde528a66e086ab1668e996d162c75f4f",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "copilot-lsp": {
@@ -52,6 +52,10 @@
       "rev": "87b1a3506211538f460786c23f98ec63ad9af4e5",
       "src": "https://github.com/Xetius/harpoon",
       "version": "'harpoon2'"
+    },
+    "lspkind.nvim": {
+      "rev": "53374a2dbcb959f1d0d5d3cf6c47c4b029151c6e",
+      "src": "https://github.com/onsails/lspkind.nvim"
     },
     "lualine.nvim": {
       "rev": "47f91c416daef12db467145e16bed5bbfe00add8",

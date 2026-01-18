@@ -10,6 +10,7 @@ vim.pack.add({
 	{ src = "https://github.com/hrsh7th/cmp-cmdline" },
 	{ src = "https://github.com/hrsh7th/nvim-cmp" },
 	{ src = "https://github.com/L3MON4D3/cmp_luasnip" },
+	{ src = "https://github.com/onsails/lspkind.nvim" },
 })
 
 require("conform").setup({
@@ -18,6 +19,7 @@ require("conform").setup({
 local cmp = require("cmp")
 local cmp_lsp = require("cmp_nvim_lsp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
+local lspkind = require("lspkind")
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -37,6 +39,20 @@ cmp.setup({
 	}, {
 		{ name = "buffer" },
 	}),
+	formatting = {
+		fields = { "abbr", "icon", "kind", "menu" },
+		format = lspkind.cmp_format({
+			maxwidth = {
+				menu = 50,
+				abbr = 50,
+			},
+			elipsis_char = "...",
+			show_labelDetails = true,
+			before = function(entry, vim_item)
+				return vim_item
+			end,
+		}),
+	},
 })
 
 cmp.setup.cmdline("/", {
