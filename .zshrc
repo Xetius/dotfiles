@@ -71,6 +71,7 @@ elif [ -x "/usr/local/bin/aws_completer" ]; then
 elif [ -x "/opt/homebrew/bin/aws_completer" ]; then
   complete -C "/opt/homebrew/bin/aws_completer" aws
 fi
+source <(flux-operator completion zsh)
 
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"

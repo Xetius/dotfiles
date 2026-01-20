@@ -5,8 +5,6 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR><Esc>", { desc = "Clear search 
 -- -- Buffers
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", { desc = "Next Buffer" })
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", { desc = "Previous Buffer" })
-vim.keymap.set("n", "<leader>x", ":bdelete!<CR>", { desc = "Delete Buffer" }) -- close buffer
-vim.keymap.set("n", "<leader>b", "<cmd>enew<CR>", { desc = "Create New Buffer" }) -- new buffer
 
 -- Window management
 vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split Window Vertically" }) -- split window vertically
