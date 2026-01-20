@@ -1,11 +1,7 @@
+local wk = require("which-key")
+
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR><Esc>", { desc = "Clear search highlight and escape" })
 
--- vim.keymap.set("n", "x", '"_x')
---
--- -- Find and center
--- vim.keymap.set("n", "n", "nzzzv")
--- vim.keymap.set("n", "N", "Nzzzv")
---
 -- -- Buffers
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", { desc = "Next Buffer" })
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", { desc = "Previous Buffer" })
@@ -27,9 +23,9 @@ vim.keymap.set("v", ">", ">gv", { desc = "Indent selection" })
 -- Move lines up/down
 vim.keymap.set("n", "<A-j>", ":m .+1<cr>==", { desc = "Move line down" })
 vim.keymap.set("n", "<A-k>", ":m .-2<cr>==", { desc = "Move line up" })
-vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move selection down" })
-vim.keymap.set("v", "<A-k>", ":m '>-2<cr>gv=gv", { desc = "Move selection up" })
-
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+--
 -- Vim-Tmux-Navigator
 vim.keymap.set("n", "<C-k>", "<cmd> TmuxNavigateLeft<cr>", { desc = "Move to left Pane" })
 vim.keymap.set("n", "<C-j>", "<cmd> TmuxNavigateDown<cr>", { desc = "Move to below Pane" })
@@ -55,12 +51,22 @@ vim.keymap.set("n", "<leader>e", "<cmd>Oil<cr>", { desc = "Open Oil" })
 
 -- Harpoon2
 local harpoon = require("harpoon")
+wk.add({
+	{ "<leader>h" },
+	group = "Harpoon",
+})
 vim.keymap.set("n", "<leader>ha", function()
 	harpoon:list():add()
 end, { desc = "Add to Harpoon" })
 vim.keymap.set("n", "<leader>hh", function()
 	harpoon.ui:toggle_quick_menu(harpoon:list())
 end, { desc = "Toggle Harpoon" })
+vim.keymap.set("n", "<leader>hp", function()
+	harpoon:list():prev()
+end, { desc = "Previous Harpoon File" })
+vim.keymap.set("n", "<leader>hn", function()
+	harpoon:list():next()
+end, { desc = "Next Harpoon File" })
 vim.keymap.set("n", "<A-1>", function()
 	harpoon:list():select(1)
 end, { desc = "Harpoon file 1" })
@@ -76,36 +82,38 @@ end, { desc = "Harpoon file 4" })
 vim.keymap.set("n", "<A-5>", function()
 	harpoon:list():select(5)
 end, { desc = "Harpoon file 5" })
--- Toggle previous & next buffers stored within Harpoon list
-vim.keymap.set("n", "<leader>hp", function()
-	harpoon:list():prev()
-end, { desc = "Previous Harpoon file" })
-vim.keymap.set("n", "<leader>hn", function()
-	harpoon:list():next()
-end, { desc = "Next Harpoon file" })
 
 -- Atone keymap (undo tree)
 vim.keymap.set("n", "<leader>uu", "<cmd>Atone toggle<cr>", { desc = "Toggle Atone undo tree" })
 
 -- Trouble
-vim.keymap.set("n", "<leader>tt", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
+wk.add({
+	{ "<leader>t" },
+	group = "Trouble",
+})
+vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
 vim.keymap.set(
 	"n",
-	"<leader>tT",
+	"<leader>xX",
 	"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
 	{ desc = "Buffer Diagnostics (Trouble)" }
 )
-vim.keymap.set("n", "<leader>ts", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols (Trouble)" })
+vim.keymap.set("n", "<leader>xs", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols (Trouble)" })
 vim.keymap.set(
 	"n",
-	"<leader>tl",
+	"<leader>xl",
 	"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
 	{ desc = "LSP Definitions / references / ... (Trouble)" }
 )
-vim.keymap.set("n", "<leader>tL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
-vim.keymap.set("n", "<leader>tQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
+
+vim.keymap.set("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
+vim.keymap.set("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfil List (Trouble)" })
 
 -- ClaudeCode
+wk.add({
+	{ "<leader>a" },
+	group = "ClaudeCode",
+})
 vim.keymap.set("n", "<leader>ac", "<cmd>ClaudeCode<cr>", { desc = "Toggle Claude" })
 vim.keymap.set("n", "<leader>af", "<cmd>ClaudeCodeFocus<cr>", { desc = "Focus Claude" })
 vim.keymap.set("n", "<leader>ar", "<cmd>ClaudeCode --resume<cr>", { desc = "Resume Claude" })
@@ -115,3 +123,13 @@ vim.keymap.set("n", "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", { desc = "Add curr
 vim.keymap.set("n", "<leader>as", "<cmd>ClaudeCodeSend<cr>", { desc = "Send to Claude" })
 vim.keymap.set("n", "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", { desc = "Accept diff" })
 vim.keymap.set("n", "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", { desc = "Deny diff" })
+
+-- Peek
+vim.keymap.set("n", "<leader>mp", function()
+	local peek = require("peek")
+	if peek.is_open() then
+		peek.close()
+	else
+		peek.open()
+	end
+end, { desc = "Toggle Peek" })
