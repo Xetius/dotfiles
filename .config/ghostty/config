@@ -4,4 +4,4 @@ font-feature = -calt
 grapheme-width-method = unicode
 keybind = shift+enter=text:\x1b\r
 background-opacity = 0.8
-macos-option-as-alt = true
+macos-option-as-alt = left
