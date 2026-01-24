@@ -49,10 +49,7 @@ vim.keymap.set("n", "<leader>e", "<cmd>Oil<cr>", { desc = "Open Oil" })
 
 -- Harpoon2
 local harpoon = require("harpoon")
-wk.add({
-	{ "<leader>h" },
-	group = "Harpoon",
-})
+harpoon:setup()
 vim.keymap.set("n", "<leader>ha", function()
 	harpoon:list():add()
 end, { desc = "Add to Harpoon" })
@@ -85,10 +82,6 @@ end, { desc = "Harpoon file 5" })
 vim.keymap.set("n", "<leader>uu", "<cmd>Atone toggle<cr>", { desc = "Toggle Atone undo tree" })
 
 -- Trouble
-wk.add({
-	{ "<leader>t" },
-	group = "Trouble",
-})
 vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
 vim.keymap.set(
 	"n",
@@ -106,21 +99,6 @@ vim.keymap.set(
 
 vim.keymap.set("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
 vim.keymap.set("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfil List (Trouble)" })
-
--- ClaudeCode
-wk.add({
-	{ "<leader>a" },
-	group = "ClaudeCode",
-})
-vim.keymap.set("n", "<leader>ac", "<cmd>ClaudeCode<cr>", { desc = "Toggle Claude" })
-vim.keymap.set("n", "<leader>af", "<cmd>ClaudeCodeFocus<cr>", { desc = "Focus Claude" })
-vim.keymap.set("n", "<leader>ar", "<cmd>ClaudeCode --resume<cr>", { desc = "Resume Claude" })
-vim.keymap.set("n", "<leader>aC", "<cmd>ClaudeCode --continue<cr>", { desc = "Continue Claude" })
-vim.keymap.set("n", "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", { desc = "Select Claude model" })
-vim.keymap.set("n", "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", { desc = "Add current buffer" })
-vim.keymap.set("n", "<leader>as", "<cmd>ClaudeCodeSend<cr>", { desc = "Send to Claude" })
-vim.keymap.set("n", "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", { desc = "Accept diff" })
-vim.keymap.set("n", "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", { desc = "Deny diff" })
 
 -- Peek
 vim.keymap.set("n", "<leader>mp", function()

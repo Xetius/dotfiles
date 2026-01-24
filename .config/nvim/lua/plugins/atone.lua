@@ -1,3 +1,5 @@
-vim.pack.add({'https://github.com/Xetius/atone.nvim'})
-require('atone').setup()
-
+return {
+	"XXiaoA/atone.nvim",
+	cmd = "Atone",
+	opts = {}, -- your configuration here
+}

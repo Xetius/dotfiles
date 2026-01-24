@@ -1,5 +1,9 @@
-vim.pack.add({ 'https://github.com/Xetius/showkeys' })
-require('showkeys').setup({
-  maxkeys = 5,
-})
---vim.cmd [[ ShowkeysToggle ]]
+return {
+  "nvzone/showkeys",
+  cmd = "ShowkeysToggle",
+  opts = {
+    timeout = 1,
+    maxkeys = 5,
+    -- more opts
+  }
+}

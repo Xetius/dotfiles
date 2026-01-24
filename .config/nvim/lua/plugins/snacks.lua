@@ -1,6 +1,6 @@
-vim.pack.add({ "https://github.com/folke/snacks.nvim" })
-
-require("snacks").setup({
+return {
+  "folke/snacks.nvim",
+  opts = {
 	dim = { enabled = true },
 	terminal = { enabled = true },
-})
+}}

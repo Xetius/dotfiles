@@ -13,14 +13,12 @@ vim.o.expandtab = true
 --
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.signcolumn = "yes:3" 
+vim.o.signcolumn = "yes"
 
 vim.o.mouse = "a"
 
--- vim.o.showmode = false
---
 vim.schedule(function()
-  vim.o.clipboard = "unnamedplus"
+	vim.o.clipboard = "unnamedplus"
 end)
 --
 -- vim.o.breakindent = true
@@ -46,16 +44,5 @@ vim.o.scrolloff = 10
 --
 vim.o.background = "dark"
 --
--- vim.o.undofile = true
---
--- vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>")
---
--- vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic Quickfix list" })
---
--- vim.api.nvim_create_autocmd("TextYankPost", {
--- 	desc = "Highlight when yanking (copying) text",
--- 	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
--- 	callback = function()
--- 		vim.hl.on_yank()
--- 	end,
--- })
+vim.o.undofile = true
+vim.o.undodir = vim.fn.stdpath("data") .. "/undo"

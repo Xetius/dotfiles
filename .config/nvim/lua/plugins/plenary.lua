@@ -1,3 +1,3 @@
-vim.pack.add({
-  { src = 'https://github.com/Xetius/plenary.nvim' },
-})
+return {
+  "nvim-lua/plenary.nvim",
+}
