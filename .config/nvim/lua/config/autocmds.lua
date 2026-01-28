@@ -28,14 +28,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		bufmap("n", "grd", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "LSP Go to Declaration" })
 		bufmap({ "n", "x" }, "gq", "<cmd>lua vim.lsp.buf.format(async = true)<cr>", { desc = "LSP Format Document" })
 	end,
-})  
+})
 
-vim.api.nvim_create_autocmd('User', {
-    pattern = 'MasonToolsStartingInstall',
-    callback = function()
-      vim.schedule(function()
-        print 'mason-tool-installer is starting'
-      end)
-    end,
-  }
-)
+vim.api.nvim_create_autocmd("User", {
+	pattern = "MasonToolsStartingInstall",
+	callback = function()
+		vim.schedule(function()
+			print("mason-tool-installer is starting")
+		end)
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	callback = function(args)
+		require("conform").format({ bufnr = args.buf })
+	end,
+})

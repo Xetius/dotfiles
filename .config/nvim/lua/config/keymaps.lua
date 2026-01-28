@@ -1,5 +1,3 @@
-local wk = require("which-key")
-
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR><Esc>", { desc = "Clear search highlight and escape" })
 
 -- -- Buffers
@@ -29,11 +27,6 @@ vim.keymap.set("n", "<C-k>", "<cmd> TmuxNavigateLeft<cr>", { desc = "Move to lef
 vim.keymap.set("n", "<C-j>", "<cmd> TmuxNavigateDown<cr>", { desc = "Move to below Pane" })
 vim.keymap.set("n", "<C-h>", "<cmd> TmuxNavigateUp<cr>", { desc = "Move to above Pane" })
 vim.keymap.set("n", "<C-l>", "<cmd> TmuxNavigateRight<cr>", { desc = "Move to right Pane" })
---
--- vim.keymap.set("n", "<leader>tw", "<cmd>Twilight<cr>", { desc = "Toggle Twilight Mode" })
---
--- vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Toggle Markdown Preview" })
---
 
 -- Telescope
 local telescope = require("telescope.builtin")
@@ -109,3 +102,8 @@ vim.keymap.set("n", "<leader>mp", function()
 		peek.open()
 	end
 end, { desc = "Toggle Peek" })
+
+-- Conform
+vim.keymap.set("n", "<leader>cf", function()
+	require("conform").format({ lsp_format = "fallback" })
+end, { desc = "Format Code" })
