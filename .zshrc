@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+if [[ "Linux" == "$(uname)" ]]; then
+  export PATH=/home/linuxbrew/.linuxbrew/bin/:$PATH
+fi
+
 if [[ ! -d ~/.zplug ]];then
     git clone https://github.com/b4b4r07/zplug ~/.zplug
 fi

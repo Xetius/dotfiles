@@ -13,7 +13,14 @@ export SAVEHIST=100000
 
 export NODE_TLS_REJECT_UNAUTHORIZED=0
 
-if [[ "$(hostname)" == "lontngm-047.local" ]]; then
+export HOSTNAME=""
+if [[ "Linux" == "$(uname)" ]]; then
+  HOSTNAME="$(cat /etc/hostname)"
+else
+  HOSTNAME="$(hostname)"
+fi
+
+if [[ "${HOSTNAME}" == "lontngm-047.local" ]]; then
     export AWS_PROFILE=DevOpsAdmin
 
     test -f "${DOTFILES}/zsh/secrets" && source "$_"
