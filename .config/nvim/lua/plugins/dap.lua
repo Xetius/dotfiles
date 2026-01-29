@@ -49,6 +49,18 @@ return {
 			-- Go configuration
 			require("dap-go").setup()
 
+			-- Add custom Go configuration with args
+			table.insert(dap.configurations.go, {
+				type = "go",
+				name = "Debug with args",
+				request = "launch",
+				program = "${file}",
+				args = function()
+					local args_string = vim.fn.input("Arguments: ")
+					return vim.split(args_string, " +")
+				end,
+			})
+
 			-- TypeScript/JavaScript configuration
 			require("dap-vscode-js").setup({
 				debugger_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter",
@@ -63,6 +75,17 @@ return {
 						name = "Launch file",
 						program = "${file}",
 						cwd = "${workspaceFolder}",
+					},
+					{
+						type = "pwa-node",
+						request = "launch",
+						name = "Launch file with args",
+						program = "${file}",
+						cwd = "${workspaceFolder}",
+						args = function()
+							local args_string = vim.fn.input("Arguments: ")
+							return vim.split(args_string, " +")
+						end,
 					},
 					{
 						type = "pwa-node",
@@ -86,11 +109,27 @@ return {
 
 			dap.configurations.rust = {
 				{
-					name = "Launch file",
+					name = "Launch (cargo build)",
 					type = "codelldb",
 					request = "launch",
 					program = function()
+						vim.fn.system("cargo build")
 						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+					end,
+					cwd = "${workspaceFolder}",
+					stopOnEntry = false,
+				},
+				{
+					name = "Launch with args (cargo build)",
+					type = "codelldb",
+					request = "launch",
+					program = function()
+						vim.fn.system("cargo build")
+						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+					end,
+					args = function()
+						local args_string = vim.fn.input("Arguments: ")
+						return vim.split(args_string, " +")
 					end,
 					cwd = "${workspaceFolder}",
 					stopOnEntry = false,

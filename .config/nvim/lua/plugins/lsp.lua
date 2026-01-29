@@ -36,7 +36,10 @@ return {
 			},
 			handlers = {
 				function(server_name)
-					vim.lsp.enable(server_name)
+					-- Skip rust_analyzer since rustaceanvim handles it
+					if server_name ~= "rust_analyzer" then
+						vim.lsp.enable(server_name)
+					end
 				end,
 			},
 		})
