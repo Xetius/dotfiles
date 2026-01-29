@@ -4,6 +4,7 @@ return {
 		"neovim/nvim-lspconfig",
 		"mason-org/mason.nvim",
 		"mason-org/mason-lspconfig.nvim",
+		"jay-babu/mason-nvim-dap.nvim",
 		{ "saghen/blink.cmp", version = "1.*" },
 		"rafamadriz/friendly-snippets",
 		{ "L3MON4D3/LuaSnip", version = "v2.0" },
@@ -17,7 +18,11 @@ return {
 		local capabilities = vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities())
 		capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
-		require("mason").setup()
+		require("mason").setup({
+			ui = {
+				border = "rounded",
+			},
+		})
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"lua_ls",
@@ -29,6 +34,19 @@ return {
 				"copilot",
 				"dotls",
 			},
+			handlers = {
+				function(server_name)
+					vim.lsp.enable(server_name)
+				end,
+			},
+		})
+		require("mason-nvim-dap").setup({
+			ensure_installed = {
+				"delve",
+				"codelldb",
+				"js-debug-adapter",
+			},
+			automatic_installation = true,
 		})
 
 		vim.lsp.config("lua_ls", {
