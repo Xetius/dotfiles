@@ -43,7 +43,7 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting"
+zplug "urbainvaes/fzf-marks"
 zplug "plugins/git",   from:oh-my-zsh
 zplug "jeffreytse/zsh-vi-mode"
 zplug "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/gruvbox", from:local, as:theme
@@ -91,3 +91,4 @@ export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.local/bin:$(brew --prefix)/bin:
 
 zplug load
 
+fastfetch
