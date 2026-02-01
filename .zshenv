@@ -27,3 +27,4 @@ if [[ "${HOSTNAME}" == "lontngm-047.local" ]]; then
 fi
 
 
+. "$HOME/.cargo/env"

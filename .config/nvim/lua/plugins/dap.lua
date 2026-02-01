@@ -97,44 +97,7 @@ return {
 				}
 			end
 
-			-- Rust configuration (using codelldb)
-			dap.adapters.codelldb = {
-				type = "server",
-				port = "${port}",
-				executable = {
-					command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
-					args = { "--port", "${port}" },
-				},
-			}
-
-			dap.configurations.rust = {
-				{
-					name = "Launch (cargo build)",
-					type = "codelldb",
-					request = "launch",
-					program = function()
-						vim.fn.system("cargo build")
-						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
-					end,
-					cwd = "${workspaceFolder}",
-					stopOnEntry = false,
-				},
-				{
-					name = "Launch with args (cargo build)",
-					type = "codelldb",
-					request = "launch",
-					program = function()
-						vim.fn.system("cargo build")
-						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
-					end,
-					args = function()
-						local args_string = vim.fn.input("Arguments: ")
-						return vim.split(args_string, " +")
-					end,
-					cwd = "${workspaceFolder}",
-					stopOnEntry = false,
-				},
-			}
+			-- Note: Rust DAP is configured via rustaceanvim plugin
 		end,
 		keys = {
 			-- Debug controls
