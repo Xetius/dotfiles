@@ -6,13 +6,34 @@ return {
     "mason-org/mason-lspconfig.nvim",
     "jay-babu/mason-nvim-dap.nvim",
     { "saghen/blink.cmp", version = "1.*" },
+    { "saghen/blink.compat", version = "1.*" },
     "rafamadriz/friendly-snippets",
     { "L3MON4D3/LuaSnip", version = "v2.0" },
     "fang2hou/blink-copilot",
   },
   opts = {},
   config = function()
-    vim.diagnostic.config({})
+    vim.diagnostic.config({
+      virtual_text = {
+        current_line = true,
+        source = true,
+      },
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = "●",
+          [vim.diagnostic.severity.WARN] = "▲",
+          [vim.diagnostic.severity.HINT] = "◆",
+          [vim.diagnostic.severity.INFO] = "■",
+        },
+      },
+      float = {
+        border = "rounded",
+        source = true,
+      },
+      underline = true,
+      update_in_insert = false,
+      severity_sort = true,
+    })
 
     local capabilities = vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities())
     capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
@@ -79,6 +100,16 @@ return {
       },
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
+        per_filetype = {
+          toml = { "crates", "lsp", "path", "snippets", "buffer" },
+        },
+        providers = {
+          crates = {
+            name = "crates",
+            module = "blink.compat.source",
+            async = true,
+          },
+        },
       },
     })
   end,
