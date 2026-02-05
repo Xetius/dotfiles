@@ -1,26 +1,33 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	lazy = false,
-	build = ":TSUpdate",
-	main = "nvim-treesitter",
-	opts = {
-		ensure_installed = {
-			"rust",
-			"toml",
-			"lua",
-			"go",
-			"gomod",
-			"gosum",
-			"javascript",
-			"typescript",
-			"yaml",
-			"json",
-			"bash",
-			"markdown",
-			"markdown_inline",
-			"vim",
-			"vimdoc",
-		},
-		auto_install = true,
-	},
+  'nvim-treesitter/nvim-treesitter',
+  dependencies = {
+    'nvim-treesitter/nvim-treesitter-context',
+
+  },
+  branch = 'main',
+  lazy = false,
+  build = ':TSUpdate',
+  config = function()
+    local treesitter = require('nvim-treesitter')
+    treesitter.install({
+      'c',
+      'cpp',
+      'glsl',
+      'lua',
+      'meson',
+      'python',
+      'vim',
+      'vimdoc',
+      'query',
+      'rust',
+      'go',
+      'json',
+      'yaml',
+      'terraform',
+      'javascript',
+      'typescript',
+      'markdown',
+      'markdown_inline',
+    })
+  end,
 }

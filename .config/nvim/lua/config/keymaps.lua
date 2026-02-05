@@ -16,6 +16,10 @@ vim.keymap.set("n", "<leader>lw", "<cmd>set wrap!<CR>", { desc = "Toggle Line Wr
 vim.keymap.set("v", "<", "<gv", { desc = "Unindent selection" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent selection" })
 
+-- Up and Down in word wrapped line
+vim.keymap.set("n", "j", "gj")
+vim.keymap.set("n", "k", "gk")
+
 -- Move lines up/down
 vim.keymap.set("n", "<A-j>", ":m .+1<cr>==", { desc = "Move line down" })
 vim.keymap.set("n", "<A-k>", ":m .-2<cr>==", { desc = "Move line up" })
