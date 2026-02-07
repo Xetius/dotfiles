@@ -2,7 +2,7 @@ return {
   "j-hui/fidget.nvim",
   opts = {
     notification = {
-      override_vim_notify = false,
+      override_vim_notify = true,
       window = {
         winblend = 0,
       },
@@ -18,9 +18,6 @@ return {
         icon_style = "Question",
         done_style = "Constant",
       },
-    },
-    integration = {
-      ["nvim-tree"] = { enable = false },
     },
   },
 }
