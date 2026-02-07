@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     bufmap("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "LSP Hover Documentation" })
     bufmap("n", "grr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "LSP References" })
     bufmap("n", "gri", "<cmd>lua vim.lsp.buf.implementation()<cr>", { desc = "LSP Implementation" })
-    bufmap("n", "grn", "<cmd>lua vim.lsp.buf.renme()<cr>", { desc = "LSP Rename" })
+    bufmap("n", "grn", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "LSP Rename" })
     bufmap("n", "gra", "<cmd>lua vim.lsp.buf.code_action()<cr>", { desc = "LSP Code Action" })
     bufmap("n", "gO", "<cmd>lua vim.lsp.buf.document_symbol()<cr>", { desc = "LSP Document Symbols" })
     bufmap({ "i", "s" }, "gq", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "LSP Signature Help" })
@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     bufmap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "LSP Go to Definition" })
     bufmap("n", "grt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", { desc = "LSP Go to Type Definition" })
     bufmap("n", "grd", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "LSP Go to Declaration" })
-    bufmap({ "n", "x" }, "gq", "<cmd>lua vim.lsp.buf.format(async = true)<cr>", { desc = "LSP Format Document" })
+    bufmap({ "n", "x" }, "gq", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", { desc = "LSP Format Document" })
   end,
 })
 
@@ -44,11 +44,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function(args)
     require("conform").format({ bufnr = args.buf })
   end,
-})
-
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { '<filetype>' },
-  callback = function() vim.treesitter.start() end,
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
