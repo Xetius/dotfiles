@@ -9,7 +9,6 @@ return {
 	config = function()
 		local treesitter = require("nvim-treesitter")
 		treesitter.install({
-			"norg",
 			"c",
 			"cpp",
 			"glsl",
