@@ -10,6 +10,7 @@ return {
     require('conform').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
+        go = { 'goimports-reviser', 'gofumpt' },
         rust = { 'rustfmt', lsp_format = 'fallback' },
         markdown = { 'markdown-prettier', stop_after_first = true },
         javascript = { 'prettierd', 'prettier', stop_after_first = true },

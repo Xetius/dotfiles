@@ -54,6 +54,13 @@ return {
         "dotls",
       },
     })
+    require("mason-tool-installer").setup({
+      ensure_installed = {
+        "gofumpt",
+        "goimports-reviser",
+        "golangci-lint",
+      },
+    })
     require("mason-nvim-dap").setup({
       ensure_installed = {
         "delve",
