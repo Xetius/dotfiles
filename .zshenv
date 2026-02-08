@@ -26,5 +26,6 @@ if [[ "${HOSTNAME}" == "lontngm-047.local" ]]; then
     test -f "${DOTFILES}/zsh/secrets" && source "$_"
 fi
 
+export OPENAI_API_KEY=$(cat ~/openai.txt)
 
 . "$HOME/.cargo/env"
