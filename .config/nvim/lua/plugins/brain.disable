@@ -12,7 +12,7 @@ return {
 				deepseek = { api_key = vim.env.DEEPSEEK_API_KEY }, -- Very affordable
 				moonshot = { api_key = vim.env.MOONSHOT_API_KEY }, -- Kimi models
 				opencode_zen = { api_key = vim.env.OPENCODE_ZEN_API_KEY }, -- Curated models
-				github_copilot = {}, -- GitHub Copilot (uses existing auth)
+				-- github_copilot = {}, -- GitHub Copilot (uses existing auth)
 
 				-- Local providers (FREE - no API keys needed!)
 				ollama = {}, -- Make sure Ollama is running: http://localhost:11434
