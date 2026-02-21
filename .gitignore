@@ -3,3 +3,4 @@ lazy-lock.json
 .config/tmux/plugins/
 .config/zsh/secrets
 .config/github-copilot/
+.DS_STORE
